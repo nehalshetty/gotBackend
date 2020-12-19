@@ -17,6 +17,7 @@ app.use(cors(corsOptions));
 
 // All the routes
 battleRoutes(app);
+searchRoute(app);
 
 app.listen(PORT, (error) => {
   if (error) {
