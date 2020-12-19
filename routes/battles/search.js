@@ -5,11 +5,10 @@ module.exports = function (app) {
   app.get("/search", async (req, res) => {
     let filters = {};
     let query = req.query;
-
     if (query) {
       let kingFilter = query.king
         ? {
-            attacker_king: query.king || query.king,
+            $or: [{ attacker_king: query.king }, { defender_king: query.king }],
           }
         : {};
 
