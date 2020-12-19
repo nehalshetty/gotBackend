@@ -9,7 +9,7 @@ let searchRoute = require("./routes/battles/search");
 const PORT = process.env.PORT;
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: process.env.CORS_ALLOWED_DOMAIN,
   optionSuccessStatus: 200,
 };
 
