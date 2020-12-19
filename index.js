@@ -1,28 +1,22 @@
 let app = require("express")();
 let mongoose = require("mongoose");
+let cors = require("cors");
 require("dotenv").config();
 
-require("dotenv").config({ path: __dirname + "/.env.local" });
-
-let BattlesSchema = require("./models/battles");
+let battleRoutes = require("./routes/battles");
+let searchRoute = require("./routes/battles/search");
 
 const PORT = process.env.PORT;
 
-app.get("/list", async (req, res) => {
-  let list = await BattlesSchema.find(
-    { location: { $ne: null || "" } },
-    { location: 1 }
-  ).distinct("location");
-  console.log(list);
+const corsOptions = {
+  origin: "http://localhost:3000",
+  optionSuccessStatus: 200,
+};
 
-  res.send(list);
-});
+app.use(cors(corsOptions));
 
-app.get("/count", async (req, res) => {
-  let count = await BattlesSchema.countDocuments();
-
-  res.send({ total: count });
-});
+// All the routes
+battleRoutes(app);
 
 app.listen(PORT, (error) => {
   if (error) {
