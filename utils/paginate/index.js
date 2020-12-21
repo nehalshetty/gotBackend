@@ -1,6 +1,7 @@
 const paginate = async ({ model, limit, page, filterBy }) => {
   let dataCount = limit ? +limit : 10;
   let pageNo = page > 0 ? +page : 1;
+
   let startIndex = (pageNo - 1) * dataCount;
   let endIndex = pageNo * dataCount;
   let totalCount = await model.aggregate([
